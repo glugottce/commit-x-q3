@@ -2,7 +2,6 @@ import subprocess
 import time
 import os
 
-# Define test cases (input, expected_output, time_limit in seconds)
 test_cases = [
     ("3input1.txt", "3output1.txt", 4),
     ("3input2.txt", "3output2.txt", 4),
@@ -16,7 +15,6 @@ test_cases = [
     ("3input10.txt", "3output10.txt", 4),
 ]
 
-# Detect the solution file
 solution_file = None
 for file in os.listdir("."):
     if file.endswith(".py") or file.endswith(".java") or file.endswith(".cpp"):
@@ -27,7 +25,6 @@ if not solution_file:
     print("❌ No valid solution file found (.py, .java, .cpp)")
     exit(1)
 
-# Determine the language and compilation (if needed)
 if solution_file.endswith(".py"):
     run_command = ["python3", solution_file]
 elif solution_file.endswith(".java"):
@@ -41,14 +38,12 @@ else:
     print("❌ Unsupported language")
     exit(1)
 
-# Compile if needed
 if solution_file.endswith((".java", ".cpp")):
     compile_result = subprocess.run(compile_command, capture_output=True, text=True)
     if compile_result.returncode != 0:
         print(f"❌ Compilation failed:\n{compile_result.stderr}")
         exit(1)
 
-# Function to run test cases
 def run_test_case(input_file, expected_output_file, time_limit):
     start_time = time.time()
 
@@ -76,7 +71,6 @@ def run_test_case(input_file, expected_output_file, time_limit):
         print(f"❌ Failed {input_file}. Expected {expected_output}, but got {actual_output}")
         return False
 
-# Run all test cases
 all_passed = all(run_test_case(tc[0], tc[1], tc[2]) for tc in test_cases)
 
 if not all_passed:
