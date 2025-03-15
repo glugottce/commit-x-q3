@@ -7,7 +7,6 @@ def findSingleNumber(arr):
         if count[num] == 1: 
             return num
 
-# Example usage
 n = int(input()) 
 arr = list(map(int, input().split()))  
 print(findSingleNumber(arr)) 
